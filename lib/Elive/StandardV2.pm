@@ -12,18 +12,18 @@ use Carp;
 
 =head1 NAME
 
-    Elive::StandardV2 - Base class for the Elive Standard Bridge StandardV2 (V2)
+Elive::StandardV2 - Perl bindings for the Elluminate Live Standard Bridge (V2)
 
 =head1 VERSION
 
-Version 0.00_1
+Version 0.00_2
 
 ** DEVELOPER RELEASE - UNDER CONSTRUCTION **
 
 
 =cut
 
-our $VERSION = '0.00_1';
+our $VERSION = '0.00_2';
 
 =head1 SYNOPSIS
 
@@ -36,6 +36,8 @@ Implements Elive Standard Bridge V2 (StandardV2) StandardV2 bindings
 ** DEVELOPER RELEASE - UNDER CONSTRUCTION **
 
 =cut
+
+=head1 METHODS
 
 =head2 data_classes
 
@@ -71,10 +73,6 @@ sub _get_results {
     return \@result;
 
 }
-
-=head1 SUBROUTINES/METHODS
-
-=head1 METHODS
 
 =head2 connect
 

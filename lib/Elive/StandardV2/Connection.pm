@@ -52,6 +52,7 @@ our %KnownCommands = (
 
     setSession => 'cu',
     setSessionMultimedia => 'u',
+    setSessionPresentation => 'u',
     setSessionTelephony => 'u',
 
     uploadMultimediaContent => 'c',
@@ -74,11 +75,12 @@ __PACKAGE__->mk_accessors( qw{_scheduling_manager _server_configuration _server_
 
     my $url1 = $ec1->url;   #  'http://someserver.com/test'
 
-    my $ec2 =  Elive::StandardV2::Connection->connect('http://user2:pass2@someserver.com/test', undef, undef, debug => 1);
+    my $ec2 =  Elive::StandardV2::Connection->connect('http://user2:pass2@someserver.com/test',
+                                                       undef, undef, debug => 1);
     my $url2 = $ec2->url;   #  'http://someserver.com/test'
 
-Establishes a SOAP connection. Retrieves the login user, to verify
-connectivity and authentication details.
+Establishes a SOAP connection. Retrieves the server configuration, to verify
+connectivity, authentication and basic operation.
 
 =cut
 
@@ -87,6 +89,8 @@ sub connect {
 
     my $self = $class->SUPER::_connect($url, $user, $pass, %opt);
     bless $self, $class;
+
+    $self->server_configuration; # ping
 
     return $self;
 }
@@ -164,7 +168,7 @@ sub soap {
 
 =head2 scheduling_manager
 
-Returns the scheduling manager for this connection (see L<Elive::Entity::SchedulingManager>).
+Returns the scheduling manager for this connection (see L<Elive::StandardV2::SchedulingManager>).
 
 =cut
 
@@ -187,7 +191,7 @@ sub scheduling_manager {
 
 =head2 server_configuration
 
-Returns the server configuration for this connection (see L<Elive::Entity::ServerConfiguration>).
+Returns the server configuration for this connection (see L<Elive::StandardV2::ServerConfiguration>).
 
 =cut
 
@@ -210,7 +214,7 @@ sub server_configuration {
 
 =head2 server_versions
 
-Returns the server versions for this connection (see L<Elive::Entity::ServerVersions>).
+Returns the server versions for this connection (see L<Elive::StandardV2::ServerVersions>).
 
 =cut
 
@@ -248,7 +252,7 @@ sub _preamble {
 
 =head2 version
 
-Return the Elluminate I<Live!> Manager version
+Equivalent to C<$self-<gt>server_versions-<gt>versionName>.
 
 =cut
 
