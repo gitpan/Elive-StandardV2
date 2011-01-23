@@ -36,7 +36,7 @@ has 'sessionId' => (is => 'rw', isa => 'Int', required => 1);
 __PACKAGE__->primary_key('sessionId');
 
 has 'accessType' => (is => 'rw', isa => 'Int',
-	       documentation => 'creator user id',
+	       documentation => 'access type; 1:private, 2:restricted, 3:public',
     );
 
 has 'allowInSessionInvites' => (is => 'rw', isa => 'Bool',
@@ -166,7 +166,7 @@ sub attendance {
      });
 
 Returns an L<Elive::StandardV2::Telephony> object for the given session. This
-can then be used to get or set the sessions's telephony characterisitics.
+can then be used to get or set the session's telephony characterisitics.
 
 =cut
 
