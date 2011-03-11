@@ -1,4 +1,3 @@
-.releaserc
 Changes
 ignore.txt
 inc/Module/Install.pm
@@ -34,9 +33,8 @@ t/10-soap-connect.t
 t/11-soap-errors.t
 t/12-soap-session.t
 t/13-soap-session-telephony.t
-t/14-multimedia.t
+t/14-soap-multimedia.t
 t/critic.t
 t/Elive/StandardV2.pm
 t/pod-coverage.t
 t/pod.t
-upload.pl
