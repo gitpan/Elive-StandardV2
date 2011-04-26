@@ -1,6 +1,6 @@
 #!perl
 use warnings; use strict;
-use Test::More tests => 21;
+use Test::More tests => 22;
 use Test::Exception;
 use Test::Builder;
 use version;
@@ -18,7 +18,7 @@ our $connection;
 
 SKIP: {
 
-    my $skippable = 21;
+    my $skippable = 22;
 
     my %result = t::Elive::StandardV2->test_connection();
     my $auth = $result{auth};
@@ -43,6 +43,7 @@ SKIP: {
 	openChair => 1,
 	mustBeSupervised => 0,
 	permissionsOn => 1,
+	chairList => [$connection->user],
 	groupingList => [qw(mechanics sewing)],
     );
 
