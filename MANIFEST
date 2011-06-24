@@ -29,12 +29,12 @@ MANIFEST			This list of files
 META.yml
 README
 t/00-load.t
-t/10-soap-connect.t
-t/11-soap-errors.t
-t/12-soap-session.t
-t/13-soap-session-telephony.t
-t/14-soap-multimedia.t
 t/critic.t
 t/Elive/StandardV2.pm
 t/pod-coverage.t
 t/pod.t
+t/soap-connect.t
+t/soap-errors.t
+t/soap-multimedia.t
+t/soap-session-telephony.t
+t/soap-session.t
