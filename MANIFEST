@@ -11,8 +11,9 @@ inc/Module/Install/Scripts.pm
 inc/Module/Install/Win32.pm
 inc/Module/Install/WriteAll.pm
 lib/Elive/StandardV2.pm
+lib/Elive/StandardV2/_Content.pm
+lib/Elive/StandardV2/_List.pm
 lib/Elive/StandardV2/Connection.pm
-lib/Elive/StandardV2/List.pm
 lib/Elive/StandardV2/Multimedia.pm
 lib/Elive/StandardV2/Presentation.pm
 lib/Elive/StandardV2/Recording.pm
