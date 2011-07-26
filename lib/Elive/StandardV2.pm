@@ -12,19 +12,21 @@ use Carp;
 
 =head1 NAME
 
-Elive::StandardV2 - Perl bindings for the Elluminate Live Standard Bridge (V2)
+Elive::StandardV2 - Perl bindings for the Elluminate Live Standard Bridge (V2) [TRIAL]
 
 =head1 VERSION
 
-Version 0.00_9
+Version 0.01_0
 
 ** DEVELOPER RELEASE - UNDER CONSTRUCTION **
 
 =cut
 
-our $VERSION = '0.00_9';
+our $VERSION = '0.01_0';
 
-=head1 SYNOPSIS
+use 5.008003;
+
+=head1 EXAMPLE
 
     use Elive::StandardV2;
     use Elive::StandardV2::Session;
@@ -34,13 +36,15 @@ our $VERSION = '0.00_9';
                                 'http://myserver/mysite',
                                 'some_user' => 'some_pass' );
 
+    # Sessions must start and end on the quarter hour.
+
     my $session_start = Elive::Util::next_quarter_hour();
     my $session_end = Elive::Util::next_quarter_hour( $session_start );
 
     my %session_data = (
 	sessionName   => 'My Demo Session',
 	creatorId     => $connection->user,
-	startTime     =>  $session_start . '000',
+	startTime     => $session_start . '000',
 	endTime       => $session_end . '000',
 	openChair     => 1,
 	mustBeSupervised => 0,
@@ -51,7 +55,7 @@ our $VERSION = '0.00_9';
 
     my $session = Elive::StandardV2::Session->insert(\%session_data);
 
-    my $url = $session->url( userId => 'bob');
+    my $url = $session->web_url( userId => 'bob');
     print "bob's session link is: $url\n";
 
 =head1 DESCRIPTION
@@ -164,11 +168,7 @@ Abstract method to commit outstanding object updates to the server.
 Updates may also be passed as parameters.
 
    # change and save foo and bar. All in one go.
-    $obj->update({foo => 'Foo', bar => 'Bar'},
-                 command => $cmd,      # soap command to use
-                 params => \%params,   # additional soap params,
-                 changed => \@props,   # properties to update,
-                );
+    $obj->update({foo => 'Foo', bar => 'Bar'});
 
 =cut
 
@@ -347,6 +347,11 @@ L<http://cpanratings.perl.org/d/Elive-StandardV2>
 L<http://search.cpan.org/dist/Elive-StandardV2/>
 
 =back
+
+=head1 SEE ALSO
+
+I<Elluminate_Live_Standard_Bridge_API_ELM_v2.0.pdf> - this contains essential
+background information and a full description of the available commands.
 
 =head1 ACKNOWLEDGEMENTS
 
