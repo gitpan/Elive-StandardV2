@@ -21,6 +21,14 @@ method.
 
 __PACKAGE__->entity_name('Presentation');
 
+=head1 PROPERTIES
+
+=head2 presentationId (Int)
+
+Identifier of the presentation file in the ELM repository.
+
+=cut
+
 has 'presentationId' => (is => 'rw', isa => 'Int', required => 1);
 __PACKAGE__->primary_key('presentationId');
 __PACKAGE__->params(
@@ -60,9 +68,9 @@ Elluminate Live! supports the following presentation file types:
 
 =over 4
 
-=item (*) Elluminate Live! Whiteboard files: C<.wbd>, C<.wbp>
+=item * Elluminate Live! Whiteboard files: C<.wbd>, C<.wbp>
 
-=item (*) Elluminate Plan! files: C<.elp>, C<.elpx>.
+=item * Elluminate Plan! files: C<.elp>, C<.elpx>.
 
 =back
 

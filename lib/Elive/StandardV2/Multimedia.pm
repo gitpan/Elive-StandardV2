@@ -21,6 +21,14 @@ method.
 
 __PACKAGE__->entity_name('Multimedia');
 
+=head1 PROPERTIES
+
+=head2 multimediaId (Int)
+
+Identifier of the multimedia file in the ELM repository.
+
+=cut
+
 has 'multimediaId' => (is => 'rw', isa => 'Int', required => 1);
 __PACKAGE__->primary_key('multimediaId');
 __PACKAGE__->params(
@@ -60,15 +68,15 @@ Elluminate Live! supports the following multimedia file types:
 
 =over 4
 
-=item (*) MPEG files: C<.mpeg>, C<.mpg>, C<.mpe>, C<.m4v>, C<.mp4>
+=item * MPEG files: C<.mpeg>, C<.mpg>, C<.mpe>, C<.m4v>, C<.mp4>
 
-=item (*) QuickTime files: C<.mov>, C<.qt>
+=item * QuickTime files: C<.mov>, C<.qt>
 
-=item (*) Windows Media files: C<.wmv>
+=item * Windows Media files: C<.wmv>
 
-=item (*) Flash files: C<.swf>
+=item * Flash files: C<.swf>
 
-=item (*) Audio files: C<.mp3>
+=item * Audio files: C<.mp3>
 
 =back
 

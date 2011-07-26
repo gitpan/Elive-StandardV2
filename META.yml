@@ -40,4 +40,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://elive.svn.sourceforge.net/svnroot/elive/trunk/Elive-StandardV2
-version: 0.01_0
+version: 0.01_1
