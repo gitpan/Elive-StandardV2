@@ -37,6 +37,7 @@ t/pod.t
 t/soap-connect.t
 t/soap-errors.t
 t/soap-multimedia.t
+t/soap-session-recurring.t
 t/soap-session-telephony.t
 t/soap-session.t
 t/soap-taint-mode.t

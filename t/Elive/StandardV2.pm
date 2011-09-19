@@ -17,6 +17,7 @@ locate test authorization from the environment
 =cut
 
 use URI;
+use Elive::StandardV2;
 
 sub test_connection {
     my $class = shift;
@@ -42,7 +43,7 @@ sub test_connection {
 
 	if ($user && $pass && $url !~ m{^mock:}i) {
 	    $result{auth} = [$url, $user, $pass, type => 'StandardV2'];
-	    if (my $debug = Elive->debug) {
+	    if (my $debug = Elive::StandardV2->debug) {
 		push (@{$result{auth}}, debug => $debug);
 	    }
 	    eval {require Elive::StandardV2::Connection};
@@ -62,6 +63,32 @@ sub generate_id {
     my @p = map {$chars[ sprintf("%d", rand(scalar @chars)) ]} (1.. 6);
 
     return join('', @p);
+}
+
+=head2 a_week_between
+
+    ok(t::Elive::a_week_between($last_week_t, $this_week_t)
+
+A rough test of times being about a week apart. Anything more
+precise is going to require time-zone aware date/time calculations
+and will introduce some pretty fat build dependencies.
+
+=cut
+
+sub a_week_between {
+    my $start = shift;
+    my $end = shift;
+
+    my $seconds_in_a_week = 7 * 24 * 60 * 60;
+    #
+    # just test that the dates are a week apart to within an hour and a
+    # half, or so. This should accomodate daylight savings and other
+    # adjustments of up to 1.5 hours.
+    #
+    my $drift = 1.6 * 60 * 60; # a little over 1.5 hours
+    my $ok = abs ($end - $start - $seconds_in_a_week) < $drift;
+
+    return $ok;
 }
 
 1;

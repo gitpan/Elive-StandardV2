@@ -28,7 +28,8 @@ requires:
   Class::Accessor: 0
   Class::Data::Inheritable: 0
   Date::Parse: 0
-  Elive: 1.15
+  Elive::DAO: 0.02
+  Elive::Util: 0.01
   File::Basename: 0
   File::Spec: 0
   Mime::Base64: 0
@@ -42,4 +43,4 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://elive.svn.sourceforge.net/svnroot/elive/trunk/Elive-StandardV2
-version: 0.01_6
+version: 0.01_7
