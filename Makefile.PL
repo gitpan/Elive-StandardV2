@@ -18,7 +18,7 @@ requires(
     'Carp'                         => 0,
     'File::Spec'                   => 0,
     'File::Basename'               => 0,
-    'Elive::DAO'                   => '0.02',
+    'Elive::DAO'                   => '0.04',
     'Elive::Util'                  => '0.01',
     'Mime::Base64'                 => 0,
     'Mouse'                        => 0.56,
@@ -26,7 +26,7 @@ requires(
     'Try::Tiny'                    => 0,
     'URI'                          => 0,
     'XML::Simple'                  => 0,
-    'YAML'                         => 0,
+    'YAML::Syck'                   => 0,
     );
 
 recommends(
