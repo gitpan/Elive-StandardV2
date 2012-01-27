@@ -98,14 +98,14 @@ has 'boundaryTime' => (is => 'rw', isa => 'Int',
 
 =head2 chairList (Str)
 
-Comma-separated list of user identifiers from your system that specifies which users may join the Elluminate Live! session as chairpersons.
+Array of user identifiers from your system that specifies which users may join the Elluminate Live! session as chairpersons.
 
 Each user identifier in the list may be 1 - 64 characters in length, and each identifier is case sensitive. A userId may not appear in both the chair and non-chair lists.
 
 =cut
 
 has 'chairList' => (is => 'rw', isa => 'Elive::StandardV2::_List', coerce => 1,
-	       documentation => 'list of chair-persons (comma separated)',
+	       documentation => 'list of chair-persons',
     );
 
 =head2 chairNotes (Str)
@@ -141,7 +141,7 @@ has 'endTime' => (is => 'rw', isa => 'HiResDate', required => 1,
 
 =head2 groupingList (Str)
 
-Comma-separated list of unique course identifiers from your system with which to associate this Elluminate Live! session.
+Array of unique course identifiers from your system with which to associate this Elluminate Live! session.
 
 Each course identifier may be 1 - 32 characters in length, and each identifier is case sensitive.
 
@@ -184,7 +184,6 @@ For single server configurations, this value must be between 1 and C<maxAvailabl
 For multiple server configurations, this must be between 1 and versionMaxFilmersLimit for the version you are using (as returned from the L<Elive::StandardV2::ServerVersions> C<get()> command).
 
 If you don't specify a value, the default is taken from the C<Maximum Simultaneous Cameras> setting in the Default Session Preferences.
-No
 
 =cut
 
@@ -228,7 +227,7 @@ Each user identifier in the list may be 1 - 64 characters in length, and each id
 =cut
 
 has 'nonChairList' => (is => 'rw', isa => 'Elive::StandardV2::_List', coerce => 1,
-	       documentation => 'list of participants (comma separated)',
+	       documentation => 'list of participants',
     );
 
 =head2 nonChairNotes (Str)
@@ -516,7 +515,7 @@ This can then be used to get or set the session's telephony characterisitics.
 sub telephony {
     my ($self, %opt) = @_;
 
-    return Elive::StandardV2::SessionTelephony->retrieve([$self],
+    return Elive::StandardV2::SessionTelephony->retrieve($self,
 							 reuse => 1,
 							 connection => $self->connection,
 							 %opt,
@@ -538,8 +537,15 @@ sub set_presentation {
     $session_id ||= $class->sessionId
 	if Scalar::Util::blessed($class);
 
-    croak 'usage: $'.(ref($class)||$class).'->set_presentation(\@presentation_ids)'
-	unless Scalar::Util::reftype( $presentation_ids ) eq 'ARRAY';
+    for ($presentation_ids) {
+	croak 'usage: $'.(ref($class)||$class).'->set_presentation(\@presentation_ids)'
+	    unless defined;
+	#
+	# coerce a single value to an array
+	#
+	$_ = [$_]
+	    if Elive::Util::_reftype($_) ne 'ARRAY';
+    }
 
     my $connection = $opt{connection} || $class->connection
 	or croak "Not connected";
@@ -575,8 +581,15 @@ sub set_multimedia {
     $session_id ||= $class->sessionId
 	if Scalar::Util::blessed($class);
 
-    croak 'usage: $'.(ref($class)||$class).'->set_multimedia(\@multimedia_ids)'
-	unless Scalar::Util::reftype( $multimedia_ids ) eq 'ARRAY';
+    for ($multimedia_ids) {
+	croak 'usage: $'.(ref($class)||$class).'->set_multimedia(\@multimedia_ids)'
+	    unless defined;
+	#
+	# coerce a single value to an array
+	#
+	$_ = [$_]
+	    if Elive::Util::_reftype($_) ne 'ARRAY';
+    }
 
     my $connection = $opt{connection} || $class->connection
 	or croak "Not connected";

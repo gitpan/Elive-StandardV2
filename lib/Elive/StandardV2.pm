@@ -17,13 +17,13 @@ Elive::StandardV2 - Perl bindings for the Elluminate Live Standard Bridge (V2) [
 
 =head1 VERSION
 
-Version 0.01_8
+Version 0.01_9
 
 ** DEVELOPER RELEASE - UNDER CONSTRUCTION **
 
 =cut
 
-our $VERSION = '0.01_8';
+our $VERSION = '0.01_9';
 
 use 5.008003;
 
@@ -249,14 +249,20 @@ sub list {
 
 sub _parse_filter {
     my ($self, $expr) = @_;
-    my (%critera) = map {
-	my ($field, $val) = m{^ \s* (\w+) \s* [\!=<>]+ (.*?) $}x;
-	carp "selection not in format <field> = <val>"
-	    unless length($val);
-	$field => $val;
-    } split(qr{ \s+ and \s+}ix, $expr);
+    my %selection;
 
-    return \%critera;
+    foreach ( split(qr{ \s+ and \s+}ix, $expr) ) {
+	my ($field, $op, $val) = m{^ \s* (\w+) \s* ([\!=<>]+) \s* (.*?) \s* $}x;
+
+	unless (defined($val) && length($val) && $op eq '=') {
+	    carp "selection expresion '$_' not in format <field> = <val>";
+	    next;
+	}
+
+	$selection{$field} = $val;
+    } ;
+
+    return \%selection;
 }
 
 =head2 delete
