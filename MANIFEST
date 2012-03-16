@@ -28,8 +28,6 @@ lib/Elive/StandardV2/SessionTelephony.pm
 Makefile.PL
 MANIFEST			This list of files
 META.yml
-MYMETA.json
-MYMETA.yml
 README
 t/00load.t
 t/critic.t
@@ -39,6 +37,7 @@ t/pod.t
 t/soap-connect.t
 t/soap-errors.t
 t/soap-multimedia.t
+t/soap-presentation.t
 t/soap-session-recurring.t
 t/soap-session-telephony.t
 t/soap-session.t
